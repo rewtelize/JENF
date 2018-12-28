@@ -23,5 +23,6 @@ from management import views
 urlpatterns = [
     url(r'^', include('AvadaKedavra.home.urls')),
 	url(r'^home/', include('AvadaKedavra.home.urls')),
-	url(r'^management/', include('AvadaKedavra.management.urls'))
+	url(r'^management/', include('AvadaKedavra.management.urls')),
+	url(r'^admin/', include(admin.site.urls))
 ]
