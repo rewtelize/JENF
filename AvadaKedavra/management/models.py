@@ -25,7 +25,8 @@ class Project(models.Model):
     country = CountryField(verbose_name="Country", multiple=True)
     # Falta por implementar para city algo parecido al choices de country.
     city = models.CharField(max_length=40, null=False, verbose_name="City")
-    organization = models.ManyToManyField(Organization, verbose_name="Organizations")
+    date = models.DateField(null=False, verbose_name="Date")
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return "{}".format(self.name)

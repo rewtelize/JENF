@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DeleteView, FormView, View, DetailView
 
 from forms import UserCreateForm
-from models import Organization, User
+from models import Organization, Project, User
 
 
 def management(request):
@@ -18,17 +18,25 @@ def show_organizations(request):
 	organizations = Organization.objects.order_by('country').order_by('name')
 	return render(request, 'organizations.html', {'organizations':organizations})
 
+def show_projects(request):
+	projects = Project.objects.order_by('country')
+	return render(request, 'projects.html', {'projects':projects})
+
 def show_users(request):
 	users = User.objects.order_by('country').order_by('firstname').order_by('lastname')
 	return render(request, 'users.html', {'users':users})
 
-def delete_user(request, pk):
-	User.objects.filter(id=pk).delete()
-	return redirect('users')
-
 def delete_organization(request, pk):
 	Organization.objects.filter(id=pk).delete()
 	return redirect('organizations')
+
+def delete_project(request, pk):
+	Project.objects.filter(id=pk).delete()
+	return redirect('projects')
+
+def delete_user(request, pk):
+	User.objects.filter(id=pk).delete()
+	return redirect('users')
 
 class UserCreateView(SuccessMessageMixin, CreateView, FormView):
 	template_name = "userCreate.html"
