@@ -6,69 +6,6 @@
             <div class="page-header float-left">
                 <div class="page-title">
                     <h1>Dashboard</h1>
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <strong class="card-title">List of users</strong>
-                        </div>
-                        <div class="card-body">
-                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Firstname</th>
-                                        <th>Lastname</th>
-                                        <th>City</th>
-                                        <th>Country</th>
-                                        <th>Birthdate</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Eliminar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                        {% for user in users %}
-                                        <tr>
-                                            <td>{{ user.firstname }}</td>
-                                            <td>{{ user.lastname }}</td>
-                                            <td>{{ user.city }}</td>
-                                            <td>{{ user.country }}</td>
-                                            <td>{{ user.birthdate }}</td>
-                                            <td>{{ user.email }}</td>
-                                            <td>{{ user.phone }}</td>
-                                            <td><a href={% url 'delete_user' pk=user.id %} style="color:rgb(0,0,0)"><i class="fa fa-close"></i></a></td>
-                                        </tr>
-                                        {% endfor %}
-
-                                    <tr>
-                                        <td>Javier</td>
-                                        <td>Barroso</td>
-                                        <td>San Fernando</td>
-                                        <td>Spain</td>
-                                        <td>16/03/1995</td>
-                                        <td>email@email.com</td>
-                                        <td>+34123456789</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jorge</td>
-                                        <td>Gutiérrez</td>
-                                        <td>San Fernando</td>
-                                        <td>Spain</td>
-                                        <td>16/03/1995</td>
-                                        <td>email@email.com</td>
-                                        <td>+34123456789</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ana</td>
-                                        <td>Gobec</td>
-                                        <td>Hodos</td>
-                                        <td>Slovenia</td>
-                                        <td>14/10/1995</td>
-                                        <td>email@email.com</td>
-                                        <td>+34123456789</td>
-                                    </tr>
-                                </tbody>
-                            </table>
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
@@ -85,16 +22,16 @@
                                             <th>Birthdate</th>
                                             <th>Email</th>
                                             <th>Phone</th>
-                                            <th>Delete</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                             {% for user in users %}
                                             <tr>
                                                 <td>{{ user.firstname }}</td>
                                                 <td>{{ user.lastname }}</td>
-                                                <td>{{ user.residence }}</td>
+                                                <td>{{ user.city }}</td>
                                                 <td>{{ user.country }}</td>
                                                 <td>{{ user.birthdate }}</td>
                                                 <td>{{ user.email }}</td>
@@ -102,13 +39,41 @@
                                                 <td><a href={% url 'delete_user' pk=user.id %} style="color:rgb(0,0,0)"><i class="fa fa-close"></i></a></td>
                                             </tr>
                                             {% endfor %}
+
+                                        <tr>
+                                            <td>Javier</td>
+                                            <td>Barroso</td>
+                                            <td>San Fernando</td>
+                                            <td>Spain</td>
+                                            <td>16/03/1995</td>
+                                            <td>email@email.com</td>
+                                            <td>+34123456789</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jorge</td>
+                                            <td>Gutiérrez</td>
+                                            <td>San Fernando</td>
+                                            <td>Spain</td>
+                                            <td>16/03/1995</td>
+                                            <td>email@email.com</td>
+                                            <td>+34123456789</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ana</td>
+                                            <td>Gobec</td>
+                                            <td>Hodos</td>
+                                            <td>Slovenia</td>
+                                            <td>14/10/1995</td>
+                                            <td>email@email.com</td>
+                                            <td>+34123456789</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div><!-- .animated -->
+                </div><!-- .content -->
             </div>
-        </div><!-- .animated -->
-    </div><!-- .content -->
+        </div>
+    </div>
 {% endblock %}
