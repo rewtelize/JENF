@@ -1,0 +1,5 @@
+# Se excluye la carpeta .idea que genera el pycharm
+.idea/
+
+# Se excluyen los ficheros "compilados" de python
+*.pyc
