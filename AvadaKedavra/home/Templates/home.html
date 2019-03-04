@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{% static "home/css/vendor.css" %}">
     <link rel="stylesheet" href="{% static "home/css/main.css" %}">
     <link rel="stylesheet" href="{% static "home/style.css" %}">
+    <link rel="stylesheet" href="{% static "home/style_projects.css" %}">
 
     <!-- script
     ================================================== -->
@@ -100,7 +101,7 @@
 
     <!-- home
     ================================================== -->
-    <section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="{% static "home/images/hero-bg.jpg"%}" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
+    <section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="{% static "home/images/background_image.jpg"%}" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
 
         <div class="overlay"></div>
         <div class="shadow-overlay"></div>
@@ -174,8 +175,8 @@
         </div> <!-- end section-header -->
 
         <div class="row about-desc" data-aos="fade-up">
-            <div class="col-full">
-                <p>
+            <div>
+                <p style="color: white">
                 Welcome! My name is Pablo Nuevo Duque and I'm the president of JENF (Juntos por la Educación No Formal)
 
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt. 
@@ -219,126 +220,89 @@
         </div>
 
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="alazea-portfolio-filter">
-                            <button class="btn active" data-filter="*">All</button>
-                            <button class="btn" data-filter=".design">Ongoing</button>
-                            <button class="btn" data-filter=".garden">Past Projects</button>
-                        
-                    </div>
-                </div>
-            </div>
-            <a href="{% static "home/img/bg-img/16.jpg" %}" title="Portfolio 1"></a>
-            <div class="row alazea-portfolio">
 
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item design home-design wow fadeInUp" data-wow-delay="100ms">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(img/bg-img/16.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="{% static "home/img/bg-img/16.jpg" %}" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 1">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+            <!-- ##### Related Product Area Start ##### -->
+		    <div class="related-products-area">
+		        <div class="container">
+		            <div class="row">
+		                <div class="col-12" align="center" style="position: absolute;right: 10 px;left: 665px;">
+		                   <div class="alazea-portfolio-filter">
+		                            <button class="btn active" data-filter="*">All</button>
+		                            <button class="btn" data-filter=".design">Ongoing</button>
+		                            <button class="btn" data-filter=".garden">Past Projects</button>
+		                    </div>
+		                </div>
+		            </div>
 
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item garden wow fadeInUp" data-wow-delay="200ms">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(img/bg-img/17.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="{% static "home/img/bg-img/17.jpg" %}" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 2">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+		            <br><br><br><br>
 
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item garden design wow fadeInUp" data-wow-delay="300ms">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(img/bg-img/18.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="{% static "home/img/bg-img/18.jpg" %}" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 3">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+		            <div class="row">
 
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item garden office-design wow fadeInUp" data-wow-delay="400ms">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(img/bg-img/19.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="{% static "home/img/bg-img/19.jpg" %}" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 4">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+		                <!-- Single Product Area -->
+		                <div class="col-12 col-sm-6 col-lg-3">
+		                    <div class="single-product-area mb-100">
+		                        <!-- Product Image -->
+		                        <div class="product-img">
+		                            <a href="shop-details.html"><img src="{% static "home/img/bg-img/40.png" %}" alt=""></a>
+		                            <!-- Product Tag -->
+		                            <div class="product-tag">
+		                                <a href="#">JENF</a>
+		                            </div>
+		                        </div>
+		                        <!-- Product Info -->
+		                        <div class="product-info mt-15 text-center">
+		                            <a href="shop-details.html">
+		                                <p>Documentalizate</p>
+		                            </a>
+		                            <h6>2018</h6>
+		                        </div>
+		                    </div>
+		                </div>
 
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item design office-design wow fadeInUp" data-wow-delay="100ms">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(img/bg-img/20.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="{% static "home/img/bg-img/20.jpg" %}" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 5">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+		                 <div class="col-12 col-sm-6 col-lg-3">
+		                    <div class="single-product-area mb-100">
+		                        <!-- Product Image -->
+		                        <div class="product-img">
+		                            <a href="shop-details.html"><img src="{% static "home/img/bg-img/40.png" %}" alt=""></a>
+		                            <!-- Product Tag -->
+		                            <div class="product-tag">
+		                                <a href="#">Youth Connect</a>
+		                            </div>
+		                        </div>
+		                        <!-- Product Info -->
+		                        <div class="product-info mt-15 text-center">
+		                            <a href="shop-details.html">
+		                                <p>Follow Your sound</p>
+		                            </a>
+		                            <h6>2018</h6>
+		                        </div>
+		                    </div>
+		                </div>
 
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item garden wow fadeInUp" data-wow-delay="200ms">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(img/bg-img/21.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="{% static "home/img/bg-img/21.jpg" %}" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 6">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+		                <div class="col-12 col-sm-6 col-lg-3">
+		                    <div class="single-product-area mb-100">
+		                        <!-- Product Image -->
+		                        <div class="product-img">
+		                            <a href="shop-details.html"><img src="{% static "home/img/bg-img/40.png" %}" alt=""></a>
+		                            <!-- Product Tag -->
+		                            <div class="product-tag">
+		                                <a href="#">Youth Europa</a>
+		                            </div>
+		                        </div>
+		                        <!-- Product Info -->
+		                        <div class="product-info mt-15 text-center">
+		                            <a href="shop-details.html">
+		                                <p>From Grey to Green</p>
+		                            </a>
+		                            <h6>2018</h6>
+		                        </div>
+		                    </div>
+		                </div>
 
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-lg-6 single_portfolio_item home-design wow fadeInUp" data-wow-delay="300ms">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(img/bg-img/22.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="{% static "home/img/bg-img/22.jpg" %}" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 7">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+		            </div>
+		        </div>
+		    </div> 
+    	</div>
     </section>
     <!-- ##### Portfolio Area End ##### -->
 
@@ -786,10 +750,6 @@
                     <span>© Copyright Glint 2017</span> 
                     <span>Site Template by <a href="https://www.colorlib.com/">Colorlib</a></span>	
                 </div>
-
-                <div class="go-top">
-                    <a class="smoothscroll" title="Back to Top" href="#top"><i class="icon-arrow-up" aria-hidden="true"></i></a>
-                </div>
             </div>
 
         </div> <!-- end footer-bottom -->
@@ -861,6 +821,16 @@
     <script src="{% static "home/js/bootstrap/bootstrap.min.js" %}"></script>
     <script src="{% static "home/js/plugins2/plugins.js" %}"></script>
     <script src="{% static "home/js/active.js" %}"></script>
+
+
+    <!-- Popper js -->
+    <script src="{% static "home/projects/js/bootstrap/popper.min.js" %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static "home/projects/js/bootstrap/bootstrap.min.js" %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static "home/projects/js/plugins/plugins.js" %}"></script>
+    <!-- Active js -->
+    <script src="{% static "home/projects/js/active.js"></script>
 
 </body>
 
