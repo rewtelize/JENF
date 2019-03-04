@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^deleteProject/(?P<pk>[0-9a-f-]+)/$', views.delete_project, name='delete_project'),
     url(r'^management/', views.management, name='management'),
     url(r'^organizations', views.show_organizations, name='organizations'),
-    url(r'^projects', views.show_projects, name='projects'),
+    url(r'^projects', views.ListProjectView.as_view(), name='projects'),
     url(r'^users', views.ListUserView.as_view(), name='users'),
     url(r'^$', views.management, name='management'),
 ]

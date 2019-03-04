@@ -18,9 +18,9 @@ def show_organizations(request):
 	organizations = Organization.objects.order_by('country').order_by('name')
 	return render(request, 'organizations.html', {'organizations':organizations})
 
-def show_projects(request):
-	projects = Project.objects.order_by('country')
-	return render(request, 'projects.html', {'projects':projects})
+# def show_projects(request):
+# 	projects = Project.objects.order_by('country')
+# 	return render(request, 'projects.html', {'projects':projects})
 
 
 def delete_organization(request, pk):
@@ -36,6 +36,7 @@ def delete_user(request, pk):
 	return redirect('users')
 
 
+# Users
 class UserCreateView(SuccessMessageMixin, CreateView, FormView):
 	template_name = "userCreate.html"
 	success_url = reverse_lazy("users")
@@ -57,3 +58,13 @@ class ListUserView(ListView):
 		qs = super(ListUserView, self).get_queryset().order_by('country', 'firstname', 'lastname')
 		return qs
 
+
+# Projects
+class ListProjectView(ListView):
+	template_name = "projects.html"
+	model = Project
+	# group_required = ['Administrador']
+
+	def get_queryset(self):
+		qs = super(ListProjectView, self).get_queryset().order_by('country')
+		return qs
