@@ -22,9 +22,6 @@ def show_projects(request):
 	projects = Project.objects.order_by('country')
 	return render(request, 'projects.html', {'projects':projects})
 
-def show_users(request):
-	users = User.objects.order_by('country').order_by('firstname').order_by('lastname')
-	return render(request, 'users.html', {'users':users})
 
 def delete_organization(request, pk):
 	Organization.objects.filter(id=pk).delete()
@@ -38,9 +35,10 @@ def delete_user(request, pk):
 	User.objects.filter(id=pk).delete()
 	return redirect('users')
 
+
 class UserCreateView(SuccessMessageMixin, CreateView, FormView):
 	template_name = "userCreate.html"
-	success_url = reverse_lazy("management")
+	success_url = reverse_lazy("users")
 	success_message = "Se ha creado con éxito el usuario"
 	form_class = UserCreateForm
 
@@ -49,4 +47,13 @@ class UserCreateView(SuccessMessageMixin, CreateView, FormView):
 		self.object.save()
 		return super(UserCreateView, self).form_valid(form)
 
+
+class ListUserView(ListView):
+	template_name = "users.html"
+	model = User
+	# group_required = ['Administrador'] Tenemos que implementar grupos ya que si no cualquiera podría acceder a la url.
+
+	def get_queryset(self):
+		qs = super(ListUserView, self).get_queryset().order_by('country', 'firstname', 'lastname')
+		return qs
 

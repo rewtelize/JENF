@@ -12,6 +12,6 @@ urlpatterns = [
     url(r'^management/', views.management, name='management'),
     url(r'^organizations', views.show_organizations, name='organizations'),
     url(r'^projects', views.show_projects, name='projects'),
-    url(r'^users', views.show_users, name='users'),
+    url(r'^users', views.ListUserView.as_view(), name='users'),
     url(r'^$', views.management, name='management'),
 ]
