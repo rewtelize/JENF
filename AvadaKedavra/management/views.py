@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DeleteView, FormView, View, DetailView
+from braces.views import LoginRequiredMixin, GroupRequiredMixin
 
 from forms import UserCreateForm
 from models import Organization, Project, User
@@ -37,6 +38,16 @@ def delete_user(request, pk):
 
 
 # Users
+class ListUserView(ListView):
+	template_name = "users.html"
+	model = User
+	# group_required = ['Administrador'] Tenemos que implementar grupos ya que si no cualquiera podría acceder a la url.
+
+	def get_queryset(self):
+		qs = super(ListUserView, self).get_queryset().order_by('country', 'firstname', 'lastname')
+		return qs
+
+
 class UserCreateView(SuccessMessageMixin, CreateView, FormView):
 	template_name = "userCreate.html"
 	success_url = reverse_lazy("users")
@@ -49,14 +60,17 @@ class UserCreateView(SuccessMessageMixin, CreateView, FormView):
 		return super(UserCreateView, self).form_valid(form)
 
 
-class ListUserView(ListView):
-	template_name = "users.html"
+class UserUpdateView(UpdateView):
+	template_name = "userCreate.html"
 	model = User
-	# group_required = ['Administrador'] Tenemos que implementar grupos ya que si no cualquiera podría acceder a la url.
+	success_url = reverse_lazy("users")
+	form_class = UserCreateForm
 
-	def get_queryset(self):
-		qs = super(ListUserView, self).get_queryset().order_by('country', 'firstname', 'lastname')
-		return qs
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.save()
+		return super(UserUpdateView, self).form_valid(form)
+
 
 
 # Projects

@@ -12,7 +12,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Creating a new user</strong>
+                        {% if object %}
+                            <strong class="card-title">Editing the user</strong>
+                        {% else %}
+                            <strong class="card-title">Creating a new user</strong>
+                        {% endif %}
                     </div>
                     <div class="card-body">
                         {{ form.media }}

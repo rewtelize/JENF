@@ -12,7 +12,7 @@
                         </div>
                         <div class="card-body">
 
-                            <div align="right">
+                            <div align="center">
                                 <a class="btn btn-success" href="{% url 'create-user' %}">
                                     <span class="fa fa-plus"></span> Create a new user
                                 </a>
@@ -41,7 +41,14 @@
                                             <td>{{ user.birthdate }}</td>
                                             <td>{{ user.email }}</td>
                                             <td>{{ user.phone }}</td>
-                                            <td><a href={% url 'delete_user' pk=user.id %} style="color:rgb(0,0,0)"><i class="fa fa-close"></i></a></td>
+                                            <td>
+                                                <a class="btn btn-danger btn-sm" title="Delete user" href={% url 'delete_user' pk=user.id %}>
+                                                    <span class="fa fa-close"></span>
+                                                </a>
+                                                <a class="btn btn-info btn-sm" title="Update user" href={% url 'update-user' pk=user.id %}>
+                                                    <span class="fa fa-edit"></span>
+                                                </a>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>
