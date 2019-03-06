@@ -1,30 +1,34 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bootstrap3 %}
 {% block contenido %}
-<div class="container">
-    <div class="content mt-3">
-        <div class="animated fadeIn">
-            <div class="row">
-                <div class="col-xs-6 col-sm-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <strong>Datos de usuario</strong>
-                        </div>
+
+<link rel="stylesheet" href="{% static "management/vendors/datetimepicker/css/jquery.datetimepicker.min.css" %}" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+<script src="{% static "management/vendors/datetimepicker/js/jquery.datetimepicker.full.min.js" %}" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Creating a new user</strong>
+                    </div>
+                    <div class="card-body">
                         {{ form.media }}
-                        <form action="" method="post" class="form-horizontal" style="max-width: 100%">
+                        <form action="" method="post" class="form-horizontal" enctype="multipart/form-data" multiple="true">
                             {% csrf_token %}
-                            {% for field in form %}
-                                <div class="card-body card-block">
-                                    <div class="form-group">
-                                        <label class="form-control-label">{{ field.label_tag }}</label>
-                                        <div class="input-group">
-                                            {{ field }}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                            <button type="submit" class="btn btn-primary col-md-offset-4 ">Guardar</button>
-                            <a href="{% url 'users' %}" class="btn btn-danger">Cancelar</a>
+                            {% bootstrap_field form.firstname layout="vertical" size="small" %}
+                            {% bootstrap_field form.lastname layout="vertical" size="small" %}
+                            {% bootstrap_field form.country layout="vertical" size="small" %}
+                            {% bootstrap_field form.birthdate layout="vertical" size="small" %}
+                            {% bootstrap_field form.residence layout="vertical" size="small" %}
+                            {% bootstrap_field form.email layout="vertical" size="small" %}
+                            {% bootstrap_field form.phone layout="vertical" size="small" %}
+                            {% buttons %}
+                                <button type="submit" class="btn btn-primary col-md-offset-4 ">Save</button>
+                                <a href="{% url 'users' %}" class="btn btn-danger">Cancel</a>
+                            {% endbuttons %}
                         </form>
                     </div>
                 </div>
@@ -32,4 +36,12 @@
         </div>
     </div>
 </div>
+<script>
+    $(function(){
+        $("#id_birthdate").datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false,
+        });
+    });
+</script>
 {% endblock %}

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'django_countries',
     'datetimewidget',
+    'bootstrap3',
 ]
 
 PHONENUMBER_DB_FORMAT = 'E164'

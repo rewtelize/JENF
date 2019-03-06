@@ -37,7 +37,7 @@ class User(models.Model):
     lastname = models.CharField(max_length=60, null=False, verbose_name="User's Last Name")
     country = CountryField(verbose_name="Country", multiple=True)
     birthdate = models.DateField(null=False, verbose_name="Birthdate")
-    residence = models.CharField(max_length=50, null=False, verbose_name="City where you live")
+    residence = models.CharField(max_length=50, null=False, verbose_name="Residence")
     email = models.EmailField(null=False, verbose_name="Email")
     phone = PhoneNumberField(verbose_name="User's phone number")
     project = models.ManyToManyField(Project, verbose_name="Projects",
