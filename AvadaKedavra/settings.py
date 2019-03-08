@@ -134,3 +134,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'management'
+
+# Cierre de sesion cuando se cierra el navegador.
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SECURITY_WARN_AFTER = 1740
+SESSION_SECURITY_EXPIRE_AFTER = 1800

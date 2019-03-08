@@ -24,7 +24,7 @@ from management import views
 
 urlpatterns = [
 	url(r'^login/$', management_views.custom_login, name='login'),
-	url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+	url(r'^logout/$', auth_views.logout, {'next_page': '/management'}, name='logout'),
 	url(r'^', include('AvadaKedavra.home.urls')),
 	url(r'^home/', include('AvadaKedavra.home.urls')),
 	url(r'^management/', include('AvadaKedavra.management.urls')),
