@@ -6,14 +6,20 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DeleteView, FormView, View, DetailView
+from django.http import HttpResponseRedirect
+from django.contrib.auth.views import login
 from braces.views import LoginRequiredMixin, GroupRequiredMixin
 
 from forms import UserCreateForm
 from models import Organization, Project, User
 
+# Login custom que comprueba si el user esta loggeado en el sistema o no.
+def custom_login(request, **kwargs):
+	if request.user.is_authenticated():
+		return HttpResponseRedirect(reverse_lazy('management'))
+	else:
+		return login(request, **kwargs)
 
-def management(request):
-	return render(request, 'management.html')
 
 def show_organizations(request):
 	organizations = Organization.objects.order_by('country').order_by('name')
@@ -32,13 +38,17 @@ def delete_project(request, pk):
 	Project.objects.filter(id=pk).delete()
 	return redirect('projects')
 
-def delete_user(request, pk):
-	User.objects.filter(id=pk).delete()
-	return redirect('users')
+# def delete_user(request, pk):
+# 	User.objects.filter(id=pk).delete()
+# 	return redirect('users')
+
+
+class ManagementView(LoginRequiredMixin, TemplateView):
+	template_name = "management.html"
 
 
 # Users
-class ListUserView(ListView):
+class ListUserView(LoginRequiredMixin, ListView):
 	template_name = "users.html"
 	model = User
 	# group_required = ['Administrador'] Tenemos que implementar grupos ya que si no cualquiera podría acceder a la url.
@@ -48,7 +58,7 @@ class ListUserView(ListView):
 		return qs
 
 
-class UserCreateView(SuccessMessageMixin, CreateView, FormView):
+class UserCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView, FormView):
 	template_name = "userCreate.html"
 	success_url = reverse_lazy("users")
 	success_message = "Se ha creado con éxito el usuario"
@@ -60,7 +70,7 @@ class UserCreateView(SuccessMessageMixin, CreateView, FormView):
 		return super(UserCreateView, self).form_valid(form)
 
 
-class UserUpdateView(UpdateView):
+class UserUpdateView(LoginRequiredMixin, UpdateView):
 	template_name = "userCreate.html"
 	model = User
 	success_url = reverse_lazy("users")
@@ -72,9 +82,21 @@ class UserUpdateView(UpdateView):
 		return super(UserUpdateView, self).form_valid(form)
 
 
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+	template_name = "delete.html"
+	model = User
+	success_url = reverse_lazy("users")
+
+	def delete(self, request, *args, **kwargs):
+		self.object = self.get_object()
+		success_url = self.get_success_url()
+		self.object.delete()
+		return HttpResponseRedirect(success_url)
+
+
 
 # Projects
-class ListProjectView(ListView):
+class ListProjectView(LoginRequiredMixin, ListView):
 	template_name = "projects.html"
 	model = Project
 	# group_required = ['Administrador']

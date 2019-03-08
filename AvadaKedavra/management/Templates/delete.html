@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block contenido %}
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Borrar <em>"{{ object }}"</em></strong>
+                        </div>
+                        <div class="card-body">
+                            <form action="" method="post">{% csrf_token %}
+                                <p>¿Confirma el borrado del siguiente elemento: <strong>"{{ object }}"</strong>?</p>
+                                <input type="submit" class="btn btn-danger" value="Confirmar" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
