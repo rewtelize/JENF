@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<meta charset="utf-8">
+		<title>Nombre del proyecto</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="colorlib.com">
+		<!-- LINEARICONS -->
+		<link rel="stylesheet" href="{% static "projects/fonts/linearicons/style.css" %}">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="{% static "projects/fonts/material-design-iconic-font/css/material-design-iconic-font.css" %}">
+
+		<!-- DATE-PICKER -->
+		<link rel="stylesheet" href="{% static "projects/vendor/date-picker/css/datepicker.min.css" %}">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{% static "projects/css/style.css" %}">
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="{% static "projects/images/form-wizard.jpg" %}" alt="">
+					<h3>Nombre del proyecto</h3>
+				</div>
+            	<div id="wizard">
+            		<!-- SECTION 1 -->
+	                <h4>What is this project about?</h4>
+	                <section>
+						<strong>Nombre del proyecto</strong>
+						<p>Descripción del proyecto</p>
+	                </section>
+
+	                <!-- SECTION 2 -->	       
+	                <h4>Which costs are included?</h4>
+	                <section class="section-style">
+	                	<style>
+							ul li { display: table; }
+							ul li ul { display: table-row; }
+							ul li ul li { position: absolute; right: 790px; }
+						</style>
+						<ul>
+                			<li><strong>Rules of the project</strong></li>
+                			<li>- Expenses of stay</li>
+                			<li>- Feeding</li>
+                				<ul>
+                					<li> Displacements </li><br>
+                					<li>- Spanish participants &rarr; Up to 100€</li><br>
+                					<li>- Italian participants &rarr; Up to 200€</li><br>
+                					<li>- Slovenian participants &rarr; Up to 300€</li><br>
+                				</ul>
+                			</li>
+                		</ul>
+	                </section>
+
+					<!-- SECTION 3 -->
+	                <h4>Rules</h4>
+	                <section class="section-style">
+                		<ul>
+                			<li><strong>Rules of the project</strong></li>
+                			<li>- Forbidden sexual harassment</li>
+                			<li>- Not being an active parcticipant</li>
+                		</ul>
+	                </section>
+
+
+	                <!-- SECTION 4 -->
+	                <h4>Apply!</h4>
+	                <section>
+                    	<div class="form-row">
+							<div class="form-holder">
+								<input type="text" class="form-control" placeholder="First Name :">
+							</div>
+							<div class="form-holder">
+								<input type="text" class="form-control" placeholder="Last Name :">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-holder">
+								<input type="text" class="form-control" placeholder="Phone :">
+							</div>
+							<div class="form-holder">
+								<input type="text" class="form-control" placeholder="Mail :">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-holder w-100">
+								<input type="text" class="form-control" placeholder="Address :">
+							</div>
+						</div>
+						<div class="form-row mb-21">
+							<div class="form-holder w-100">
+								<textarea name="" id="" class="form-control" style="height: 79px;" placeholder="Special Requirements :"></textarea>
+							</div>
+						</div>
+	                    <div class="checkbox">
+							<label>
+								<input type="checkbox"> I have read and accept the <a href="#">terms and conditions.</a>
+								<span class="checkmark"></span>
+							</label>
+						</div>
+	                    <button class="forward" style="width: 195px; margin-top: 44px;">Book by email
+							<i class="zmdi zmdi-long-arrow-right"></i>
+						</button>
+	                </section>
+            	</div>
+			</div>
+		</div>
+
+		<script src="{% static "projects/js/jquery-3.3.1.min.js" %}"></script>
+
+		<!-- JQUERY STEP -->
+		<script src="{% static "projects/js/jquery.steps.js" %}"></script>
+
+		<!-- DATE-PICKER -->
+		<script src="{% static "projects/vendor/date-picker/js/datepicker.js" %}"></script>
+		<script src="{% static "projects/vendor/date-picker/js/datepicker.en.js" %}"></script>
+
+		<script src="{% static "projects/js/main.js" %}"></script>
+<!-- Template created and distributed by Colorlib -->
+</body>
+</html>
