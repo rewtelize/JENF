@@ -26,7 +26,6 @@ urlpatterns = [
 	url(r'^login/$', management_views.custom_login, name='login'),
 	url(r'^logout/$', auth_views.logout, {'next_page': '/management'}, name='logout'),
 	url(r'^', include('AvadaKedavra.home.urls')),
-	url(r'^home/', include('AvadaKedavra.home.urls')),
 	url(r'^management/', include('AvadaKedavra.management.urls')),
 	url(r'^admin/', include(admin.site.urls))
 ]

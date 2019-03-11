@@ -23,13 +23,13 @@
 			<div class="inner">
 				<div class="image-holder">
 					<img src="{% static "projects/images/form-wizard.jpg" %}" alt="">
-					<h3>Nombre del proyecto</h3>
+					<h3>{{ project.name }}</h3>
 				</div>
             	<div id="wizard">
             		<!-- SECTION 1 -->
 	                <h4>What is this project about?</h4>
 	                <section>
-						<strong>Nombre del proyecto</strong>
+						<strong>{{ project.name }}</strong>
 						<p>Descripción del proyecto</p>
 	                </section>
 
@@ -120,5 +120,5 @@
 
 		<script src="{% static "projects/js/main.js" %}"></script>
 <!-- Template created and distributed by Colorlib -->
-</body>
+	</body>
 </html>

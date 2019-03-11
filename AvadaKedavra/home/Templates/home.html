@@ -239,65 +239,24 @@
 		            <div class="row">
 
 		                <!-- Single Product Area -->
+                        {% for project in projects %}
+
 		                <div class="col-12 col-sm-6 col-lg-3">
 		                    <div class="single-product-area mb-100">
-		                        <!-- Product Image -->
-		                        <div class="product-img">
-		                            <a href="shop-details.html"><img src="{% static "home/img/bg-img/40.png" %}" alt=""></a>
-		                            <!-- Product Tag -->
-		                            <div class="product-tag">
-		                                <a href="#">JENF</a>
-		                            </div>
+		                        <div class="">
+		                            <a href={% url 'exchange' pk=project.id %}><img src="{% static "home/img/bg-img/40.png" %}" alt=""></a>
 		                        </div>
 		                        <!-- Product Info -->
 		                        <div class="product-info mt-15 text-center">
-		                            <a href="shop-details.html">
-		                                <p>Documentalizate</p>
+		                            <a href={% url 'exchange' pk=project.id %}>
+		                                <p>{{ project.name }}</p>
 		                            </a>
-		                            <h6>2018</h6>
+		                            <h6>{{ project.date }}</h6>
 		                        </div>
 		                    </div>
 		                </div>
 
-		                 <div class="col-12 col-sm-6 col-lg-3">
-		                    <div class="single-product-area mb-100">
-		                        <!-- Product Image -->
-		                        <div class="product-img">
-		                            <a href="shop-details.html"><img src="{% static "home/img/bg-img/40.png" %}" alt=""></a>
-		                            <!-- Product Tag -->
-		                            <div class="product-tag">
-		                                <a href="#">Youth Connect</a>
-		                            </div>
-		                        </div>
-		                        <!-- Product Info -->
-		                        <div class="product-info mt-15 text-center">
-		                            <a href="shop-details.html">
-		                                <p>Follow Your sound</p>
-		                            </a>
-		                            <h6>2018</h6>
-		                        </div>
-		                    </div>
-		                </div>
-
-		                <div class="col-12 col-sm-6 col-lg-3">
-		                    <div class="single-product-area mb-100">
-		                        <!-- Product Image -->
-		                        <div class="product-img">
-		                            <a href="shop-details.html"><img src="{% static "home/img/bg-img/40.png" %}" alt=""></a>
-		                            <!-- Product Tag -->
-		                            <div class="product-tag">
-		                                <a href="#">Youth Europa</a>
-		                            </div>
-		                        </div>
-		                        <!-- Product Info -->
-		                        <div class="product-info mt-15 text-center">
-		                            <a href="shop-details.html">
-		                                <p>From Grey to Green</p>
-		                            </a>
-		                            <h6>2018</h6>
-		                        </div>
-		                    </div>
-		                </div>
+                        {% endfor %}
 
 		            </div>
 		        </div>
