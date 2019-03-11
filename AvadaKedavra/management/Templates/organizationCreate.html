@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+{% block contenido %}
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            {% if object %}
+                                <strong class="card-title">Editing the user</strong>
+                            {% else %}
+                                <strong class="card-title">Creating a new user</strong>
+                            {% endif %}
+                        </div>
+                        <div class="card-body">
+                            {{ form.media }}
+                            <form action="" method="post" class="form-horizontal" enctype="multipart/form-data" multiple="true">
+                                {% csrf_token %}
+                                {% bootstrap_field form.name layout="vertical" size="small" %}
+                                {% bootstrap_field form.description layout="vertical" size="small" %}
+                                {% bootstrap_field form.country layout="vertical" size="small" %}
+                                {% bootstrap_field form.president layout="vertical" size="small" %}
+                                {% bootstrap_field form.president_email layout="vertical" size="small" %}
+                                {% bootstrap_field form.president_phone layout="vertical" size="small" %}
+                                {% buttons %}
+                                    <button type="submit" class="btn btn-primary col-md-offset-4 ">Save</button>
+                                    <a href="{% url 'users' %}" class="btn btn-danger">Cancel</a>
+                                {% endbuttons %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

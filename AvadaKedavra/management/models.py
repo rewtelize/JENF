@@ -11,7 +11,7 @@ class Organization(models.Model):
     description = models.CharField(max_length=500, null=True, blank=True, verbose_name="Description of the organization.")
     country = CountryField(verbose_name="Country", multiple=True) #La opción multiple permite seleccionar varios países
     president = models.CharField(max_length=50, null=False, verbose_name="President's name.")
-    president_email = models.EmailField(null=False, verbose_name="President's name")
+    president_email = models.EmailField(null=False, verbose_name="President's email")
     president_phone = PhoneNumberField(verbose_name="President's phone")
 
 
