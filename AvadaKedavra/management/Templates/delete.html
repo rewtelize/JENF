@@ -6,12 +6,12 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Borrar <em>"{{ object }}"</em></strong>
+                            <strong class="card-title">Deleting <em>"{{ object }}"</em></strong>
                         </div>
                         <div class="card-body">
                             <form action="" method="post">{% csrf_token %}
-                                <p>¿Confirma el borrado del siguiente elemento: <strong>"{{ object }}"</strong>?</p>
-                                <input type="submit" class="btn btn-danger" value="Confirmar" />
+                                <p>Are you sure that you want to delte the element: <strong>"{{ object }}"</strong>?</p>
+                                <input type="submit" class="btn btn-danger" value="Continue" />
                             </form>
                         </div>
                     </div>
