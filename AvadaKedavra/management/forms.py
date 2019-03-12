@@ -1,4 +1,6 @@
+# coding=utf-8
 from django import forms
+from django.contrib.auth.models import User as UserAdmin
 from models import User, Organization
 import time
 
@@ -26,3 +28,20 @@ class OrganizationCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(OrganizationCreateForm, self).__init__(*args, **kwargs)
 
+
+class UserAdminUpdateForm(forms.ModelForm):
+    class Meta:
+        model = UserAdmin
+        fields = ['first_name', 'last_name', 'username', 'email']
+
+    def __init__(self, *args, **kwargs):
+        super(UserAdminUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['username'].help_text = ""
+
+    def clean(self):
+        if self.data['password'] is None or self.data['passwordRepeat'] is None:
+            raise forms.ValidationError("La contraseña o el repetir contraseña está en blanco.")
+        if self.data['password'] != self.data['passwordRepeat']:
+            raise forms.ValidationError("Error, contraseñas no son iguales.")
+
+        return self.data

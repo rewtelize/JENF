@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+{% block contenido %}
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Editing the admin user</strong>
+                    </div>
+                    <div class="card-body">
+                        {{ form.media }}
+                        <form action="" method="post" class="form-horizontal" enctype="multipart/form-data" multiple="true">
+                            {% csrf_token %}
+                            {% bootstrap_field form.first_name label="Admin's first name" placeholder="Admin's first name" %}
+                            {% bootstrap_field form.last_name label="Admin's last name" placeholder="Admin's last name" %}
+                            {% bootstrap_field form.username label="Username" placeholder="username" %}
+                            <div class="form-group">
+                                <label class="control-label" for="id_password">Nueva Contraseña</label>
+                                <input type="password" name="password"  title="" required="" id="id_password" maxlength="128" placeholder="Password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="id_passwordRepeat">Repite Nueva Contraseña</label>
+                                <input type="password" name="passwordRepeat"  title="" required="" id="id_password" maxlength="128" placeholder="New Password" class="form-control">
+                            </div>
+                            {% buttons %}
+                                <button type="submit" class="btn btn-primary col-md-offset-4 ">Update</button>
+                                <a href="{% url 'management' %}" class="btn btn-danger">Cancel</a>
+                            {% endbuttons %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

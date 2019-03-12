@@ -9,8 +9,9 @@ from django.views.generic import TemplateView, CreateView, ListView, UpdateView,
 from django.http import HttpResponseRedirect
 from django.contrib.auth.views import login
 from braces.views import LoginRequiredMixin, GroupRequiredMixin
+from django.contrib.auth.models import User as UserAdmin
 
-from forms import UserCreateForm, OrganizationCreateForm
+from forms import UserCreateForm, OrganizationCreateForm, UserAdminUpdateForm
 from models import Organization, Project, User
 
 # Login custom que comprueba si el user esta loggeado en el sistema o no.
@@ -29,6 +30,18 @@ def delete_organization(request, pk):
 class ManagementView(LoginRequiredMixin, TemplateView):
 	template_name = "management.html"
 
+
+# Para que el administrador pueda modificar su usuario.
+class UserAdminUpdateView(LoginRequiredMixin, UpdateView):
+	model = UserAdmin
+	template_name = "userAdminUpdate.html"
+	form_class = UserAdminUpdateForm
+	success_url = reverse_lazy('management')
+
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.set_password(form.data['password'])
+		return super(UserAdminUpdateView, self).form_valid(form)
 
 # Users
 class ListUserView(LoginRequiredMixin, ListView):
