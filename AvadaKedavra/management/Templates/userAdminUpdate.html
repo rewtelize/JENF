@@ -11,18 +11,20 @@
                         <strong class="card-title">Editing the admin user</strong>
                     </div>
                     <div class="card-body">
+                        {% include "messages.html" %}
                         {{ form.media }}
                         <form action="" method="post" class="form-horizontal" enctype="multipart/form-data" multiple="true">
                             {% csrf_token %}
                             {% bootstrap_field form.first_name label="Admin's first name" placeholder="Admin's first name" %}
                             {% bootstrap_field form.last_name label="Admin's last name" placeholder="Admin's last name" %}
                             {% bootstrap_field form.username label="Username" placeholder="username" %}
+                            {% bootstrap_field form.email label="Email" placeholder="email" %}
                             <div class="form-group">
-                                <label class="control-label" for="id_password">Nueva Contraseña</label>
+                                <label class="control-label" for="id_password">New Password</label>
                                 <input type="password" name="password"  title="" required="" id="id_password" maxlength="128" placeholder="Password" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="id_passwordRepeat">Repite Nueva Contraseña</label>
+                                <label class="control-label" for="id_passwordRepeat">Repeat New Password</label>
                                 <input type="password" name="passwordRepeat"  title="" required="" id="id_password" maxlength="128" placeholder="New Password" class="form-control">
                             </div>
                             {% buttons %}

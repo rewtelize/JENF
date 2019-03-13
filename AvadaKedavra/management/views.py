@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, render_to_response
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DeleteView, FormView, View, DetailView
 from django.http import HttpResponseRedirect
@@ -32,22 +33,30 @@ class ManagementView(LoginRequiredMixin, TemplateView):
 
 
 # Para que el administrador pueda modificar su usuario.
-class UserAdminUpdateView(LoginRequiredMixin, UpdateView):
+class UserAdminUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 	model = UserAdmin
 	template_name = "userAdminUpdate.html"
 	form_class = UserAdminUpdateForm
 	success_url = reverse_lazy('management')
+	success_message = "Success updating the admin user"
 
 	def form_valid(self, form):
-		self.object = form.save(commit=False)
-		self.object.set_password(form.data['password'])
-		return super(UserAdminUpdateView, self).form_valid(form)
+		passwordValid1 = True
+		passwordvalid2 = True
+		if form.data['password'] != form.data['passwordRepeat']:
+			messages.error(self.request, "Passwords are not equal")
+			passwordvalid2 = False
+		if passwordValid1 is False or passwordvalid2 is False:
+			return render(self.request, "userAdminUpdate.html", {'pk': int(self.kwargs['pk']), 'form': form})
+		else:
+			self.object = form.save(commit=False)
+			self.object.set_password(form.data['password'])
+			return super(UserAdminUpdateView, self).form_valid(form)
 
 # Users
 class ListUserView(LoginRequiredMixin, ListView):
 	template_name = "users.html"
 	model = User
-	# group_required = ['Administrador'] Tenemos que implementar grupos ya que si no cualquiera podría acceder a la url.
 
 	def get_queryset(self):
 		qs = super(ListUserView, self).get_queryset().order_by('country', 'firstname', 'lastname')
@@ -57,7 +66,7 @@ class ListUserView(LoginRequiredMixin, ListView):
 class UserCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView, FormView):
 	template_name = "userCreate.html"
 	success_url = reverse_lazy("users")
-	success_message = "Se ha creado con éxito el usuario"
+	success_message = "Success creating the user"
 	form_class = UserCreateForm
 
 	def form_valid(self, form):
@@ -66,10 +75,11 @@ class UserCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView, FormVi
 		return super(UserCreateView, self).form_valid(form)
 
 
-class UserUpdateView(LoginRequiredMixin, UpdateView):
+class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 	template_name = "userCreate.html"
 	model = User
 	success_url = reverse_lazy("users")
+	success_message = "Success updating the user"
 	form_class = UserCreateForm
 
 	def form_valid(self, form):
@@ -78,7 +88,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 		return super(UserUpdateView, self).form_valid(form)
 
 
-class UserDeleteView(LoginRequiredMixin, DeleteView):
+class UserDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
 	template_name = "delete.html"
 	model = User
 	success_url = reverse_lazy("users")
@@ -87,6 +97,7 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 		self.object = self.get_object()
 		success_url = self.get_success_url()
 		self.object.delete()
+		messages.success(self.request, "Success deleting the user")
 		return HttpResponseRedirect(success_url)
 
 
@@ -112,11 +123,12 @@ class ListOrganizationView(LoginRequiredMixin, ListView):
 		return qs
 
 
-class CreateOrganizationView(LoginRequiredMixin, CreateView):
+class CreateOrganizationView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 	template_name = "organizationCreate.html"
 	model = Organization
 	form_class = OrganizationCreateForm
 	success_url = reverse_lazy('organizations')
+	success_message = "Success creating the organization"
 
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
@@ -124,10 +136,11 @@ class CreateOrganizationView(LoginRequiredMixin, CreateView):
 		return super(CreateOrganizationView, self).form_valid(form)
 
 
-class UpdateOrganizationView(LoginRequiredMixin, UpdateView):
+class UpdateOrganizationView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 	template_name = "organizationCreate.html"
 	model = Organization
 	success_url = reverse_lazy('organizations')
+	success_message = "Success updating the organization"
 	form_class = OrganizationCreateForm
 
 	def form_valid(self, form):
@@ -145,4 +158,5 @@ class DeleteOrganizationView(LoginRequiredMixin, DeleteView):
 		self.object = self.get_object()
 		success_url = self.get_success_url()
 		self.object.delete()
+		messages.success(self.request, "Success deleting the organization")
 		return HttpResponseRedirect(success_url)

@@ -38,10 +38,10 @@ class UserAdminUpdateForm(forms.ModelForm):
         super(UserAdminUpdateForm, self).__init__(*args, **kwargs)
         self.fields['username'].help_text = ""
 
-    def clean(self):
-        if self.data['password'] is None or self.data['passwordRepeat'] is None:
-            raise forms.ValidationError("La contraseña o el repetir contraseña está en blanco.")
-        if self.data['password'] != self.data['passwordRepeat']:
-            raise forms.ValidationError("Error, contraseñas no son iguales.")
-
-        return self.data
+    # def clean(self):
+    #     if self.data['password'] is None or self.data['passwordRepeat'] is None:
+    #         raise forms.ValidationError("La contraseña o el repetir contraseña está en blanco.")
+    #     if self.data['password'] != self.data['passwordRepeat']:
+    #         raise forms.ValidationError("Error, contraseñas no son iguales.")
+    #
+    #     return self.cleaned_data

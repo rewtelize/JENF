@@ -12,17 +12,17 @@ urlpatterns = [
     # Users
     url(r'^users', views.ListUserView.as_view(), name='users'),
     url(r'^crearUsuario', UserCreateView.as_view(), name="create-user"),
-    url(r'^updateUser/(?P<pk>[0-9a-f-])/$', views.UserUpdateView.as_view(), name="update-user"),
-    url(r'^deleteUser/(?P<pk>[0-9a-f-]+)/$', views.UserDeleteView.as_view(), name="delete-user"),
+    url(r'^updateUser/(?P<pk>\d+)/$', views.UserUpdateView.as_view(), name="update-user"),
+    url(r'^deleteUser/(?P<pk>\d+)/$', views.UserDeleteView.as_view(), name="delete-user"),
     url(r'^$', views.ManagementView.as_view(), name='management'),
     # Organizations
     url(r'^organizations', views.ListOrganizationView.as_view(), name='organizations'),
     url(r'^createOrganization/$', views.CreateOrganizationView.as_view(), name='create-organization'),
-    url(r'^deleteOrganization/(?P<pk>[0-9a-f-]+)/$', views.DeleteOrganizationView.as_view(),
+    url(r'^deleteOrganization/(?P<pk>\d+)/$', views.DeleteOrganizationView.as_view(),
         name='delete-organization'),
-    url(r'^updateOrganization/(?P<pk>[0-9a-f-]+)/$', views.UpdateOrganizationView.as_view(),
+    url(r'^updateOrganization/(?P<pk>\d+)/$', views.UpdateOrganizationView.as_view(),
         name='update-organization'),
     # Admin User
-    url(r'^updateUserAdmin/(?P<pk>[0-9a-f-]+)/$', views.UserAdminUpdateView.as_view(),
+    url(r'^updateUserAdmin/(?P<pk>\d+)/$', views.UserAdminUpdateView.as_view(),
         name='update-userAdmin'),
 ]
