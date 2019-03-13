@@ -7,3 +7,6 @@
 # Se excluyen migraciones.
 00*.py
 
+# Se excluye el subir la base de datos con cada commit
+*.sqlite3
+
