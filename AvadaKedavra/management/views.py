@@ -3,24 +3,43 @@ from __future__ import unicode_literals
 
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponse
-from django.shortcuts import redirect, render, render_to_response
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DeleteView, FormView, View, DetailView
+from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DeleteView, FormView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.views import login
-from braces.views import LoginRequiredMixin, GroupRequiredMixin
+from braces.views import LoginRequiredMixin
 from django.contrib.auth.models import User as UserAdmin
+from django.contrib.auth import authenticate
+from django.contrib.auth.forms import AuthenticationForm
 
 from forms import UserCreateForm, OrganizationCreateForm, UserAdminUpdateForm
 from models import Organization, Project, User
 
 # Login custom que comprueba si el user esta loggeado en el sistema o no.
 def custom_login(request, **kwargs):
+	# if request.user.is_authenticated():
+	# 	return HttpResponseRedirect(reverse_lazy('management'))
+	# else:
+	# 	return login(request, **kwargs)
 	if request.user.is_authenticated():
 		return HttpResponseRedirect(reverse_lazy('management'))
 	else:
-		return login(request, **kwargs)
+		if request.method == "POST":
+			form = AuthenticationForm(request, data=request.POST)
+			if form.is_valid():
+				username = form.cleaned_data['username']
+				password = form.cleaned_data['password']
+				user = authenticate(username=username, password=password)
+				if user is not None and user.is_active:
+					messages.success(request, "Success in logging.")
+					login(request, user)
+					return HttpResponseRedirect(reverse_lazy('management'))
+			else:
+				messages.error(request, "Error! username or password are wrong.")
+				return render(request, "registration/login.html", {'form': form})
+		else:
+			return login(request, **kwargs)
 
 
 def delete_organization(request, pk):
