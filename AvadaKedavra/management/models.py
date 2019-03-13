@@ -21,12 +21,11 @@ class Organization(models.Model):
 
 class Project(models.Model):
     name = models.CharField(max_length=50, null=False, verbose_name="Project's name.")
-    code = models.CharField(max_length=20, null=False, verbose_name="Code of the project.")
+    description = models.CharField(max_length=500, null=True, blank=True, verbose_name="Description of the project.")
+    includedCosts = models.CharField(max_length=500, null=True, blank=True, verbose_name="Costs included in the project.")
     country = CountryField(verbose_name="Country", multiple=True)
-    # Falta por implementar para city algo parecido al choices de country.
-    city = models.CharField(max_length=40, null=False, verbose_name="City")
     date = models.DateField(null=False, verbose_name="Date")
-    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+    organization = models.ForeignKey(Organization, null=True, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return "{}".format(self.name)

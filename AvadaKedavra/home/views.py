@@ -12,7 +12,5 @@ def home(request):
 	return render(request, 'home.html', {'projects':projects})
 
 def exchange(request, pk):
-	print('------------------------')
  	project = Project.objects.filter(id=pk).first()
- 	print(project)
 	return render(request, 'exchange.html', {'project': project})

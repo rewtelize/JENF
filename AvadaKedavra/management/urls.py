@@ -6,7 +6,7 @@ from views import UserCreateView
 from django.contrib.auth.views import password_change
 
 urlpatterns = [
-    # url(r'^deleteProject/(?P<pk>[0-9a-f-]+)/$', views.delete_project, name='delete_project'),
+    url(r'^deleteProject/(?P<pk>[0-9a-f-]+)/$', views.delete_project, name='delete_project'),
     url(r'^management/', views.ManagementView.as_view(), name='management'),
     url(r'^projects', views.ListProjectView.as_view(), name='projects'),
     # Users
@@ -25,4 +25,6 @@ urlpatterns = [
     # Admin User
     url(r'^updateUserAdmin/(?P<pk>\d+)/$', views.UserAdminUpdateView.as_view(),
         name='update-userAdmin'),
+    # Project
+    url(r'^createProject', views.create_project, name='create_project'),
 ]

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, render_to_response
 from django.urls import reverse_lazy
@@ -15,6 +16,8 @@ from django.contrib.auth.models import User as UserAdmin
 from forms import UserCreateForm, OrganizationCreateForm, UserAdminUpdateForm
 from models import Organization, Project, User
 
+import datetime
+
 # Login custom que comprueba si el user esta loggeado en el sistema o no.
 def custom_login(request, **kwargs):
 	if request.user.is_authenticated():
@@ -22,6 +25,32 @@ def custom_login(request, **kwargs):
 	else:
 		return login(request, **kwargs)
 
+def create_project(request):
+	if request.method == "POST":
+		form = UserCreateForm(request.POST, request.FILES)
+		
+		title = request.POST.get("title")
+		description = request.POST.get("description")
+		country = request.POST.get("country")
+		includedCosts = request.POST.get("includedCosts")
+		file = request.FILES['file']
+
+		fs = FileSystemStorage()
+		filename = fs.save("Image-" + title + ".png", file)
+		uploaded_file_url = fs.url(filename)
+
+		p = Project(name=title, description=description, includedCosts=includedCosts, date=datetime.datetime.now())
+		p.save()
+		return redirect('projects')
+
+	else:
+		form = UserCreateForm()
+
+	return render(request, 'exchange_admin.html', {'form':form,})
+
+def delete_project(request, pk):
+	Project.objects.filter(id=pk).delete()
+	return redirect('projects')
 
 def delete_organization(request, pk):
 	Organization.objects.filter(id=pk).delete()

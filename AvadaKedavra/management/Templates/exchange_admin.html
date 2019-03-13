@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<meta charset="utf-8">
+		<title>New project</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="colorlib.com">
+		<!-- LINEARICONS -->
+		<link rel="stylesheet" href="{% static "projects/fonts/linearicons/style.css" %}">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="{% static "projects/fonts/material-design-iconic-font/css/material-design-iconic-font.css" %}">
+
+		<!-- DATE-PICKER -->
+		<link rel="stylesheet" href="{% static "projects/vendor/date-picker/css/datepicker.min.css" %}">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{% static "projects/css/style.css" %}">
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="inner">
+				<form enctype="multipart/form-data" method="post"> {% csrf_token %}
+					<div class="image-holder">
+						<img src="{% static "projects/images/form-wizard.jpg" %}" alt="">
+						<h3>New project</h3>
+					</div>
+	            	<div id="wizard">
+	            		<!-- SECTION 1 -->
+		                <h4>What is this project about?</h4>
+		                <section>
+							<div class="form-row">
+		              			<div class="col-md-6">
+			                		<label for="exampleInputPassword1">Title</label>
+			                		<input class="form-control" name="title" id="exampleInputName" type="text" placeholder="Title">
+			              		</div>			         
+			              	</div>
+			              	<div class="form-row">
+				              	<div class="col-md-6">
+				                	<label for="exampleConfirmPassword">Description</label>
+				                	<input class="form-control" name="description" id="exampleInputDescription" type="text" placeholder="Description of the project">
+				              	</div>
+			            	</div>
+		                </section>
+
+		                <!-- SECTION 2 -->	       
+		                <h4>Which costs are included?</h4>
+		                <section class="section-style">
+		                	<div class="form-row">
+				              	<div class="col-md-6">
+				                	<label for="exampleConfirmPassword">Included costs</label>
+				                	<input class="form-control" name="includedCosts" id="exampleInputName" type="text" placeholder="Costs included">
+				              	</div>
+			            	</div>
+		                </section>
+
+						<!-- SECTION 3 -->
+		                <h4>Image of the project</h4>
+		                <section class="section-style">
+	                		<div class="col-md-6">
+		                		<label for="exampleInputPassword1">Picture of the project</label>
+		                		<input class="form-control" type="file" name="file"  id="fichero" accept=".png">
+		              		</div>
+		                </section>
+
+
+		                <!-- SECTION 4 -->
+		                <h4>Just for statistics!</h4>
+		                <section>
+		                	<div class="form-row">
+			                	<div class="col-md-6">
+			                		<label for="exampleInputPassword1">Organization</label>
+			                		<!-- SELECT aquí con lista de organizaciones ya creadas en BD -->
+			                		<input class="form-control" name="organization" id="exampleInputName" type="text" placeholder="Organization">
+			              		</div>
+		              		</div>
+		              		<div class="form-row">
+			              		<div class="col-md-6">
+			                		<label for="exampleInputPassword1">Country of the project</label>
+			                		<input class="form-control" name="country" id="exampleInputName" type="text" placeholder="Country">
+			              		</div>
+			              	</div>
+		                	<button type="submit" class="btn btn-primary btn-block"/>Confirmar</button>
+		                </section>
+            		</div>
+            	</form>
+			</div>
+		</div>
+
+		<script src="{% static "projects/js/jquery-3.3.1.min.js" %}"></script>
+
+		<!-- JQUERY STEP -->
+		<script src="{% static "projects/js/jquery.steps.js" %}"></script>
+
+		<!-- DATE-PICKER -->
+		<script src="{% static "projects/vendor/date-picker/js/datepicker.js" %}"></script>
+		<script src="{% static "projects/vendor/date-picker/js/datepicker.en.js" %}"></script>
+
+		<script src="{% static "projects/js/main.js" %}"></script>
+<!-- Template created and distributed by Colorlib -->
+	</body>
+</html>
