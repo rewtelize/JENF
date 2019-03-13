@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-<<<<<<< HEAD
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, render_to_response
