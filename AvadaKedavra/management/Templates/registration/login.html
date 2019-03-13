@@ -1,11 +1,12 @@
 {% load bootstrap3 %}
 {% load static %}
 <link rel="stylesheet" href="{% static "management/vendors/login/bootstrapLogin.min.css" %}">
-<script src="{% static "management/vendors/login/bootstrapLogin.min.js" %}"></script>
+<link rel="stylesheet" href="{% static "management/vendors/font-awesome/css/font-awesome.min.css" %}">
 <script src="{% static "management/vendors/jquery-3.3.1.js" %}"></script>
+<script src="{% static "management/vendors/login/bootstrapLogin.min.js" %}"></script>
 <body style="background-image:url({% static "home/images/background_image.jpg" %}); background-size: auto;"></body>
 <div class="row">
-    <center><h2><em>Bienvenido al área de administración de JENF</em></h2></center>
+    <center><h2><em>Welcome to the JENF managemente center. Please logg in.</em></h2></center>
     <br>
     <div class="col-md-4 col-md-offset-4">
         <div class="login-panel panel panel-default">
@@ -13,6 +14,13 @@
                 <h3 class="panel-title">Sign In</h3>
             </div>
             <div class="panel-body">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger">
+                            <span class="fa fa-exclamation-triangle"><strong> {{ message }}</strong></span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 <form method="post">
                     {% csrf_token %}
                     <fieldset>
