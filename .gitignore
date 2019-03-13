@@ -9,4 +9,4 @@
 
 # Se excluye el subir la base de datos con cada commit
 *.sqlite3
-
+db.sqlite3
