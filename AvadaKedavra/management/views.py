@@ -90,12 +90,9 @@ class UserAdminUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 	success_message = "Success updating the admin user"
 
 	def form_valid(self, form):
-		passwordValid1 = True
-		passwordvalid2 = True
+		passwordvalid = True
 		if form.data['password'] != form.data['passwordRepeat']:
 			messages.error(self.request, "Passwords are not equal")
-			passwordvalid2 = False
-		if passwordValid1 is False or passwordvalid2 is False:
 			return render(self.request, "userAdminUpdate.html", {'pk': int(self.kwargs['pk']), 'form': form})
 		else:
 			self.object = form.save(commit=False)

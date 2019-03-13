@@ -16,9 +16,11 @@
             <div class="panel-body">
                 {% if messages %}
                     {% for message in messages %}
-                        <div class="alert alert-danger">
-                            <span class="fa fa-exclamation-triangle"><strong> {{ message }}</strong></span>
-                        </div>
+                        {% if message.tags == "error" %}
+                            <div class="alert alert-danger">
+                                <span class="fa fa-exclamation-triangle"><strong> {{ message }}</strong></span>
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
                 <form method="post">
