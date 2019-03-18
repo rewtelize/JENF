@@ -37,7 +37,11 @@
                                             <td>{{ user.firstname }}</td>
                                             <td>{{ user.lastname }}</td>
                                             <td>{{ user.residence }}</td>
-                                            <td>{{ user.country }}</td>
+                                            <td>
+                                            {% for c in user.country %}
+                                                {{ c.name }}
+                                            {% endfor %}
+                                            </td>
                                             <td>{{ user.birthdate }}</td>
                                             <td>{{ user.email }}</td>
                                             <td>{{ user.phone }}</td>

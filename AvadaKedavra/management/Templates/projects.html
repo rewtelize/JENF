@@ -32,7 +32,11 @@
                                         {% for project in object_list %}
                                         <tr>
                                             <td>{{ project.name }}</td>
-                                            <td>{{ project.country }}</td>
+                                            <td>
+                                                {% for c in project.country %}
+                                                    {{ c.name }}
+                                                {% endfor %}
+                                            </td>
                                             <td>{{ project.date }}</td>
                                             <td>{{ project.organization }}</td>
                                             <td><a href={% url 'delete_project' pk=project.id %} style="color:rgb(0,0,0)"><i class="fa fa-close"></i></a></td>

@@ -35,11 +35,21 @@
                                         {% for organization in organizations %}
                                         <tr>
                                             <td>{{ organization.name }}</td>
-                                            <td>{{ organization.country }}</td>
+                                            <td>
+                                                {% for c in organization.country %}
+                                                    {{ c.name }}
+                                                {% endfor %}
+                                            </td>
                                             <td>{{ organization.description }}</td>
                                             <td>{{ organization.president }}</td>
                                             <td>{{ organization.president_email }}</td>
-                                            <td>{{ organization.president_phone }}</td>
+                                            <td>
+                                                {% if not organization.president_phone %}
+                                                    <span style="font-weight:bolder; color: #0e90d2">Not specified</span>
+                                                {% else %}
+                                                    {{ organization.president_phone }}
+                                                {% endif %}
+                                            </td>
                                             <td>
                                                 <a class="btn btn-danger btn-sm" title="Delete organization" href={% url 'delete-organization' pk=organization.pk %}>
                                                     <span class="fa fa-close"></span>
