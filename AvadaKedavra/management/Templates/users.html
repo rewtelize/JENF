@@ -38,9 +38,11 @@
                                             <td>{{ user.lastname }}</td>
                                             <td>{{ user.residence }}</td>
                                             <td>
-                                            {% for c in user.country %}
-                                                {{ c.name }}
-                                            {% endfor %}
+                                            <ul class="list-group-item">
+                                                {% for c in user.country %}
+                                                    <li>{{ c.name }}</li>
+                                                {% endfor %}
+                                            </ul>
                                             </td>
                                             <td>{{ user.birthdate }}</td>
                                             <td>{{ user.email }}</td>

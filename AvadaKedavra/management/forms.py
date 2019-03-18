@@ -1,7 +1,7 @@
 # coding=utf-8
 from django import forms
 from django.contrib.auth.models import User as UserAdmin
-from models import User, Organization
+from models import User, Organization, Project
 import time
 
 
@@ -37,3 +37,13 @@ class UserAdminUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserAdminUpdateForm, self).__init__(*args, **kwargs)
         self.fields['username'].help_text = ""
+
+
+class ProjectCreateForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(ProjectCreateForm, self).__init__(*args, **kwargs)
+        self.fields['date'].initial = time.strftime("%d/%m/%Y")

@@ -2,26 +2,36 @@
 <html>
 	<head>
 		{% load static %}
+        {% load bootstrap3 %}
 		<meta charset="utf-8">
 		<title>New project</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="author" content="colorlib.com">
+
+        <!-- JQUERY -->
+        <script src="{% static "management/vendors/jquery-3.3.1.js" %}"></script>
+        <script src="{% static "projects/js/main.js" %}"></script>
+
 		<!-- LINEARICONS -->
 		<link rel="stylesheet" href="{% static "projects/fonts/linearicons/style.css" %}">
 
 		<!-- MATERIAL DESIGN ICONIC FONT -->
 		<link rel="stylesheet" href="{% static "projects/fonts/material-design-iconic-font/css/material-design-iconic-font.css" %}">
 
-		<!-- DATE-PICKER -->
-		<link rel="stylesheet" href="{% static "projects/vendor/date-picker/css/datepicker.min.css" %}">
-
 		<!-- STYLE CSS -->
 		<link rel="stylesheet" href="{% static "projects/css/style.css" %}">
+
+        <!-- Datetimepicker -->
+        <script src="{% static "management/vendors/datetimepicker/js/jquery.datetimepicker.full.min.js" %}" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static "management/vendors/datetimepicker/css/jquery.datetimepicker.min.css" %}" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+
 	</head>
 	<body>
 		<div class="wrapper">
 			<div class="inner">
-				<form enctype="multipart/form-data" method="post"> {% csrf_token %}
+                {{ form.media }}
+				<form action="" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
 					<div class="image-holder">
 						<img src="{% static "projects/images/form-wizard.jpg" %}" alt="">
 						<h3>New project</h3>
@@ -32,14 +42,17 @@
 		                <section>
 							<div class="form-row">
 		              			<div class="col-md-6">
-			                		<label for="exampleInputPassword1">Title</label>
-			                		<input class="form-control" name="title" id="exampleInputName" type="text" placeholder="Title">
+                                    {% bootstrap_field form.name form_group_class="form_control" placeholder="Title" label="Title" %}
 			              		</div>			         
 			              	</div>
 			              	<div class="form-row">
 				              	<div class="col-md-6">
-				                	<label for="exampleConfirmPassword">Description</label>
-				                	<input class="form-control" name="description" id="exampleInputDescription" type="text" placeholder="Description of the project">
+                                    {% bootstrap_field form.description form_group_class="form_control" placeholder="Description of the project" label="Description" %}
+				              	</div>
+			            	</div>
+                            <div class="form-row">
+				              	<div class="col-md-6">
+                                    {% bootstrap_field form.date form_group_class="form_control" placeholder="Date" label="Date" %}
 				              	</div>
 			            	</div>
 		                </section>
@@ -49,8 +62,7 @@
 		                <section class="section-style">
 		                	<div class="form-row">
 				              	<div class="col-md-6">
-				                	<label for="exampleConfirmPassword">Included costs</label>
-				                	<input class="form-control" name="includedCosts" id="exampleInputName" type="text" placeholder="Costs included">
+                                    {% bootstrap_field form.includedCosts form_group_class="form_control" placeholder="Costs included" label="Included costs" %}
 				              	</div>
 			            	</div>
 		                </section>
@@ -70,34 +82,35 @@
 		                <section>
 		                	<div class="form-row">
 			                	<div class="col-md-6">
-			                		<label for="exampleInputPassword1">Organization</label>
-			                		<!-- SELECT aquí con lista de organizaciones ya creadas en BD -->
-			                		<input class="form-control" name="organization" id="exampleInputName" type="text" placeholder="Organization">
+                                    {% bootstrap_field form.organization form_group_class="form_control" placeholder="Organization" label="Organization" %}
 			              		</div>
 		              		</div>
 		              		<div class="form-row">
 			              		<div class="col-md-6">
-			                		<label for="exampleInputPassword1">Country of the project</label>
-			                		<input class="form-control" name="country" id="exampleInputName" type="text" placeholder="Country">
+                                    {% bootstrap_field form.country form_group_class="form_control" placeholder="Country" label="Country of the project" %}
+                                    <p class="help-tooltip"><em><b>Pressing crtl+click on the left button of the mouse you can select multiple countries</b></em></p>
 			              		</div>
 			              	</div>
-		                	<button type="submit" class="btn btn-primary btn-block"/>Confirmar</button>
+		                	<button type="submit" class="btn btn-primary btn-block">Confirmar</button>
 		                </section>
             		</div>
             	</form>
 			</div>
 		</div>
 
-		<script src="{% static "projects/js/jquery-3.3.1.min.js" %}"></script>
 
 		<!-- JQUERY STEP -->
 		<script src="{% static "projects/js/jquery.steps.js" %}"></script>
 
-		<!-- DATE-PICKER -->
-		<script src="{% static "projects/vendor/date-picker/js/datepicker.js" %}"></script>
-		<script src="{% static "projects/vendor/date-picker/js/datepicker.en.js" %}"></script>
 
-		<script src="{% static "projects/js/main.js" %}"></script>
-<!-- Template created and distributed by Colorlib -->
+
+        <script>
+        $(function(){
+            $("#id_date").datetimepicker({
+                format: 'd/m/Y',
+                timepicker: false,
+            });
+        });
+        </script>
 	</body>
 </html>

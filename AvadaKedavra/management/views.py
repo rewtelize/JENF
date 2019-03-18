@@ -15,7 +15,7 @@ from django.contrib.auth.models import User as UserAdmin
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
-from forms import UserCreateForm, OrganizationCreateForm, UserAdminUpdateForm
+from forms import UserCreateForm, OrganizationCreateForm, UserAdminUpdateForm, ProjectCreateForm
 from models import Organization, Project, User
 
 import datetime
@@ -45,36 +45,33 @@ def custom_login(request, **kwargs):
 		else:
 			return login(request, **kwargs)
 
-def create_project(request):
-	if request.method == "POST":
-		form = UserCreateForm(request.POST, request.FILES)
-		
-		title = request.POST.get("title")
-		description = request.POST.get("description")
-		country = request.POST.get("country")
-		includedCosts = request.POST.get("includedCosts")
-		file = request.FILES['file']
-
-		fs = FileSystemStorage()
-		filename = fs.save("Image-" + title + ".png", file)
-		uploaded_file_url = fs.url(filename)
-
-		p = Project(name=title, description=description, includedCosts=includedCosts, date=datetime.datetime.now())
-		p.save()
-		return redirect('projects')
-
-	else:
-		form = UserCreateForm()
-
-	return render(request, 'exchange_admin.html', {'form':form,})
+# def create_project(request):
+# 	if request.method == "POST":
+# 		form = UserCreateForm(request.POST, request.FILES)
+#
+# 		title = request.POST.get("title")
+# 		description = request.POST.get("description")
+# 		country = request.POST.get("country")
+# 		includedCosts = request.POST.get("includedCosts")
+# 		file = request.FILES['file']
+#
+# 		fs = FileSystemStorage()
+# 		filename = fs.save("Image-" + title + ".png", file)
+# 		uploaded_file_url = fs.url(filename)
+#
+# 		p = Project(name=title, description=description, includedCosts=includedCosts, date=datetime.datetime.now())
+# 		p.save()
+# 		return redirect('projects')
+#
+# 	else:
+# 		form = UserCreateForm()
+#
+# 	return render(request, 'exchange_admin.html', {'form':form,})
 
 def delete_project(request, pk):
 	Project.objects.filter(id=pk).delete()
 	return redirect('projects')
 
-def delete_organization(request, pk):
-	Organization.objects.filter(id=pk).delete()
-	return redirect('organizations')
 
 
 class ManagementView(LoginRequiredMixin, TemplateView):
@@ -162,6 +159,61 @@ class ListProjectView(LoginRequiredMixin, ListView):
 	def get_queryset(self):
 		qs = super(ListProjectView, self).get_queryset().order_by('country')
 		return qs
+	
+
+class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+	template_name = "exchange_admin.html"
+	model = Project
+	success_url = reverse_lazy('projects')
+	success_message = "Success creating the project"
+	form_class = ProjectCreateForm
+
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		try:
+			file = self.request.FILES['file']
+
+			fs = FileSystemStorage()
+			filename = fs.save("Image-" + self.object.name + ".png", file)
+			uploaded_file_url = fs.url(filename)
+		except:
+			pass
+		self.object.save()
+		return super(ProjectCreateView, self).form_valid(form)
+
+
+class ProjectUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+	template_name = "exchange_admin.html"
+	model = Project
+	success_url = reverse_lazy('projects')
+	success_message = "Success updating the project"
+	form_class = ProjectCreateForm
+
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		try:
+			file = self.request.FILES['file']
+
+			fs = FileSystemStorage()
+			filename = fs.save("Image-" + self.object.name + ".png", file)
+			uploaded_file_url = fs.url(filename)
+		except:
+			pass
+		self.object.save()
+		return super(ProjectUpdateView, self).form_valid(form)
+
+
+class ProjectDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+	template_name = "delete.html"
+	model = Project
+	success_url = reverse_lazy('projects')
+	success_message = "Success deleting the project"
+
+	def delete(self, request, *args, **kwargs):
+		self.object = self.get_object()
+		self.object.delete()
+		messages.success(self.request, self.success_message)
+		return HttpResponseRedirect(self.success_url)
 
 
 # Organizations

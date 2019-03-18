@@ -31,14 +31,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                        {% for organization in organizations %}
+                                    {% for organization in organizations %}
                                         <tr>
                                             <td>{{ organization.name }}</td>
                                             <td>
-                                                {% for c in organization.country %}
-                                                    {{ c.name }}
-                                                {% endfor %}
+                                                <ul class="list-group-item">
+                                                    {% for c in organization.country %}
+                                                        <li>{{ c.name }}</li>
+                                                    {% endfor %}
+                                                </ul>
                                             </td>
                                             <td>{{ organization.description }}</td>
                                             <td>{{ organization.president }}</td>
@@ -59,7 +60,7 @@
                                                 </a>
                                             </td>
                                         </tr>
-                                        {% endfor %}
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

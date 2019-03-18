@@ -13,7 +13,7 @@
                         <div class="card-body">
                             {% include "messages.html" %}
                             <div align="center">
-                                <a class="btn btn-success" href="{% url 'create_project' %}">
+                                <a class="btn btn-success" href="{% url 'create-project' %}">
                                     <span class="fa fa-plus"></span> Create a new project
                                 </a>
                             </div>
@@ -21,28 +21,37 @@
                                 <thead>
                                     <tr>
                                         <th>Project</th>
-                                        <th>Country</th>
+                                        <th>Countries</th>
                                         <th>Date</th>
                                         <th>Organization</th>
-                                        <th>Delete</th>
+                                        <th>Included Costs</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                        {% for project in object_list %}
-                                        <tr>
-                                            <td>{{ project.name }}</td>
-                                            <td>
+                                    {% for project in object_list %}
+                                    <tr>
+                                        <td>{{ project.name }}</td>
+                                        <td>
+                                            <ul class="list-group-item">
                                                 {% for c in project.country %}
-                                                    {{ c.name }}
+                                                    <li>{{ c.name }}</li>
                                                 {% endfor %}
-                                            </td>
-                                            <td>{{ project.date }}</td>
-                                            <td>{{ project.organization }}</td>
-                                            <td><a href={% url 'delete_project' pk=project.id %} style="color:rgb(0,0,0)"><i class="fa fa-close"></i></a></td>
-                                        </tr>
-                                        {% endfor %}
-
+                                            </ul>
+                                        </td>
+                                        <td>{{ project.date }}</td>
+                                        <td>{{ project.organization }}</td>
+                                        <td>{{ project.includedCosts }}</td>
+                                        <td>
+                                            <a class="btn btn-danger btn-sm" title="Delete project" href={% url 'delete-project' pk=project.id %}>
+                                                <span class="fa fa-close"></span>
+                                            </a>
+                                            <a class="btn btn-info btn-sm" title="Update project" href={% url 'update-project' pk=project.id %}>
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
