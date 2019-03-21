@@ -52,12 +52,18 @@
                                                 {% endif %}
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger btn-sm" title="Delete organization" href={% url 'delete-organization' pk=organization.pk %}>
-                                                    <span class="fa fa-close"></span>
-                                                </a>
-                                                <a class="btn btn-info btn-sm" title="Update organization" href={% url 'update-organization' pk=organization.pk %}>
-                                                    <span class="fa fa-edit"></span>
-                                                </a>
+                                                <div class="row" style="margin-left: 2px">
+                                                    <form action="{% url 'delete-organization' pk=organization.pk %}" method="post">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-danger btn-sm confirmar-borrado" title="Delete organization">
+                                                            <span class="fa fa-trash"></span>
+                                                        </button>
+                                                    </form>
+
+                                                    <a class="btn btn-info btn-sm" title="Update organization" href={% url 'update-organization' pk=organization.pk %}>
+                                                        <span class="fa fa-edit"></span>
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                     {% endfor %}

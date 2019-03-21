@@ -48,12 +48,18 @@
                                             <td>{{ user.email }}</td>
                                             <td>{{ user.phone }}</td>
                                             <td>
-                                                <a class="btn btn-danger btn-sm" title="Delete user" href={% url 'delete-user' pk=user.id %}>
-                                                    <span class="fa fa-close"></span>
-                                                </a>
-                                                <a class="btn btn-info btn-sm" title="Update user" href={% url 'update-user' pk=user.id %}>
-                                                    <span class="fa fa-edit"></span>
-                                                </a>
+                                                <div class="row" style="margin-left: 2px">
+                                                    <form action="{% url 'delete-user' pk=user.id %}" method="post">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-danger btn-sm confirmar-borrado" value="Continue">
+                                                            <span class="fa fa-trash"></span>
+                                                        </button>
+                                                    </form>
+
+                                                    <a class="btn btn-info btn-sm" title="Update user" href={% url 'update-user' pk=user.id %}>
+                                                        <span class="fa fa-edit"></span>
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                     {% endfor %}

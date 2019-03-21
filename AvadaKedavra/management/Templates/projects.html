@@ -43,12 +43,18 @@
                                         <td>{{ project.organization }}</td>
                                         <td>{{ project.includedCosts }}</td>
                                         <td>
-                                            <a class="btn btn-danger btn-sm" title="Delete project" href={% url 'delete-project' pk=project.id %}>
-                                                <span class="fa fa-close"></span>
-                                            </a>
-                                            <a class="btn btn-info btn-sm" title="Update project" href={% url 'update-project' pk=project.id %}>
-                                                <span class="fa fa-edit"></span>
-                                            </a>
+                                            <div class="row" style="margin-left: 2px">
+                                                <form action="{% url 'delete-project' pk=project.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger confirmar-borrado" title="Delete project">
+                                                        <span class="fa fa-trash"></span>
+                                                    </button>
+                                                </form>
+
+                                                <a class="btn btn-info" title="Update project" href={% url 'update-project' pk=project.id %}>
+                                                    <span class="fa fa-edit"></span>
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                     {% endfor %}
