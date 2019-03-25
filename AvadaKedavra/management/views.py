@@ -77,6 +77,13 @@ def delete_project(request, pk):
 class ManagementView(LoginRequiredMixin, TemplateView):
 	template_name = "management.html"
 
+	def get_context_data(self, **kwargs):
+		context = super(ManagementView, self).get_context_data()
+		context['Users'] = User.objects.all().count()
+		context['Organizations'] = Organization.objects.all().count()
+		context['Projects'] = Project.objects.all().count()
+		return context
+
 
 # Para que el administrador pueda modificar su usuario.
 class UserAdminUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):

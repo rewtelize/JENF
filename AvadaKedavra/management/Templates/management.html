@@ -6,7 +6,47 @@
             <div class="row">
                 <div class="col-md-12">
                     {% include "messages.html" %}
-                    <center><h3>Welcome to the JENF management center</h3></center>
+                    <div class="col-sm-6 col-lg-4">
+                        <a class="card" href="{% url "users" %}">
+                            <div class="card-body">
+                                <div class="stat-widget-one">
+                                    <div class="stat-icon dib"><i class="ti-user text-success border-success"></i></div>
+                                    <div class="stat-content dib">
+                                        <div class="stat-text">Users on JENF</div>
+                                        <div class="stat-digit">{{ Users }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4">
+                        <a class="card" href="{% url "organizations" %}">
+                            <div class="card-body">
+                                <div class="stat-widget-one">
+                                    <div class="stat-icon dib"><i class="ti-agenda text-primary border-primary"></i></div>
+                                    <div class="stat-content dib">
+                                        <div class="stat-text">Organizations on JENF</div>
+                                        <div class="stat-digit">{{ Organizations }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4">
+                        <a class="card" href="{% url "projects" %}">
+                            <div class="card-body">
+                                <div class="stat-widget-one">
+                                    <div class="stat-icon dib"><i class="ti-map-alt text-warning border-warning"></i></div>
+                                    <div class="stat-content dib">
+                                        <div class="stat-text">Projects on JENF</div>
+                                        <div class="stat-digit">{{ Projects }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
