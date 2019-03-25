@@ -70,20 +70,73 @@
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <!-- La clase navButtons no tiene ninguna implementación especial, no es un css, simplemente se ha puesto para poder
-                         obtener los elementos en el script -->
-                    <li class="active">
-                        <a href={% url 'management' %}> <i class="menu-icon fa fa-home"></i>Home </a>
-                    </li>
-                    <li>
-                        <a href={% url 'users' %}> <i class="menu-icon fa fa-user"></i>Users </a>
-                    </li>
-                    <li>
-                        <a href={% url 'organizations' %}> <i class="menu-icon fa fa-group (alias)"></i>Organizations </a>
-                    </li>
-                    <li>
-                        <a href={% url 'projects' %}> <i class="menu-icon fa fa-plane"></i>Projects </a>
-                    </li>
+                    {# Solución provisional a mantener activo el botón de la página en la que se encuentra el usuario #}
+                    {% if request.path == "/management/" %}
+                        <li class="active" id="homeButton">
+                            <a href={% url 'management' %}> <i class="menu-icon fa fa-home"></i>Home </a>
+                        </li>
+                        <li id="userButton">
+                            <a href={% url 'users' %}> <i class="menu-icon fa fa-user"></i>Users </a>
+                        </li>
+                        <li id="OrganizationButton">
+                            <a href={% url 'organizations' %}> <i class="menu-icon fa fa-group (alias)"></i>Organizations </a>
+                        </li>
+                        <li id="projectButton">
+                            <a href={% url 'projects' %}> <i class="menu-icon fa fa-plane"></i>Projects </a>
+                        </li>
+                    {% elif request.path == "/management/users" %}
+                        <li id="homeButton">
+                            <a href={% url 'management' %}> <i class="menu-icon fa fa-home"></i>Home </a>
+                        </li>
+                        <li class="active" id="userButton">
+                            <a href={% url 'users' %}> <i class="menu-icon fa fa-user"></i>Users </a>
+                        </li>
+                        <li id="OrganizationButton">
+                            <a href={% url 'organizations' %}> <i class="menu-icon fa fa-group (alias)"></i>Organizations </a>
+                        </li>
+                        <li id="projectButton">
+                            <a href={% url 'projects' %}> <i class="menu-icon fa fa-plane"></i>Projects </a>
+                        </li>
+                    {% elif request.path == "/management/organizations" %}
+                        <li id="homeButton">
+                            <a href={% url 'management' %}> <i class="menu-icon fa fa-home"></i>Home </a>
+                        </li>
+                        <li id="userButton">
+                            <a href={% url 'users' %}> <i class="menu-icon fa fa-user"></i>Users </a>
+                        </li>
+                        <li class="active" id="OrganizationButton">
+                            <a href={% url 'organizations' %}> <i class="menu-icon fa fa-group (alias)"></i>Organizations </a>
+                        </li>
+                        <li id="projectButton">
+                            <a href={% url 'projects' %}> <i class="menu-icon fa fa-plane"></i>Projects </a>
+                        </li>
+                    {% elif request.path == "/management/projects" %}
+                        <li id="homeButton">
+                            <a href={% url 'management' %}> <i class="menu-icon fa fa-home"></i>Home </a>
+                        </li>
+                        <li id="userButton">
+                            <a href={% url 'users' %}> <i class="menu-icon fa fa-user"></i>Users </a>
+                        </li>
+                        <li id="OrganizationButton">
+                            <a href={% url 'organizations' %}> <i class="menu-icon fa fa-group (alias)"></i>Organizations </a>
+                        </li>
+                        <li class="active" id="projectButton">
+                            <a href={% url 'projects' %}> <i class="menu-icon fa fa-plane"></i>Projects </a>
+                        </li>
+                    {% else %}
+                        <li id="homeButton">
+                            <a href={% url 'management' %}> <i class="menu-icon fa fa-home"></i>Home </a>
+                        </li>
+                        <li id="userButton">
+                            <a href={% url 'users' %}> <i class="menu-icon fa fa-user"></i>Users </a>
+                        </li>
+                        <li id="OrganizationButton">
+                            <a href={% url 'organizations' %}> <i class="menu-icon fa fa-group (alias)"></i>Organizations </a>
+                        </li>
+                        <li id="projectButton">
+                            <a href={% url 'projects' %}> <i class="menu-icon fa fa-plane"></i>Projects </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -134,21 +187,15 @@
     </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
-
     <script>
         // No funciona porque se vuelve a cargar el base por lo que el botón que se ha puesto como activo pasa de nuevo
         // a inactivo.
-        var buttons = document.getElementsByTagName("LI");
-        for(var i=0; i<buttons.length; i++)
-        {
-            buttons[i].addEventListener("click", function(){
-               var current = document.getElementsByClassName("active")[0];
-               current.className = current.className.replace("active", "");
-               this.className += "active";
-            });
-        }
-    </script>
+        $(".nav a").on("click", function(){
+           $(".nav").find(".active").removeClass("active");
+           $(this).parent().addClass("active");
+        });
 
+    </script>
 </body>
 
 </html>
